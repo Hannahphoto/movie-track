@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveStars</title>
+    <title>Movie Track</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -12,10 +12,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Tourney:ital,wght@1,200;1,300&display=swap" rel="stylesheet">   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georama:wght@300&display=swap" rel="stylesheet">
 </head>
 
-<body class="teal accent-3">
-    <nav class="teal accent-4">
+<body class="blue-grey darken-4">
+    <nav class="blue-grey darken-4">
         <div class="nav-wrapper">
             </a>
             <ul>
@@ -23,7 +29,7 @@
                     <li><a>
                             <input tyle="text" placeholder="Enter Movie Title" id="input">
                         </a></li>
-                    <li><a id="searchButton" class="waves-effect waves-light btn teal">search
+                    <li><a id="searchButton" class="waves-effect waves-light btn black">search
 
                             <i class="material-icons right" type="submit" id="searchButton">search</i>
                         </a></li>
@@ -31,7 +37,10 @@
             </ul>
         </div>
     </nav>
-    <img class="logo" src="./assets/IMG_0207.PNG">
+    <!-- <img class="logo" src="./assets/IMG_0207.PNG"> -->
+    <h1>
+        Movie Track 
+    </h1>
 
     <main>
         <!-- Error Modal -->
@@ -44,13 +53,18 @@
   
         <div>
             <h5 class="center-align">A website where you can search for movies and their soundtracks, add
-                them to your watchlist, and save your reviews and comments after watching.</h5>
+                them your watchlist, and link to the soundtrack on Spotify.</h5>
         </div>
         <br>
         
         <section class="parent-container">
 
-            <ul class="movieInfo flex-container" id="list">
+            <ul class="flex-container" id="list">
+                <li class="movieInfo"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
 
             <section class="flex-container2">
@@ -67,9 +81,9 @@
         <br>
         
         <div class="input-field">
-            <input class="teal" type="text" id="item-input" placeholder="Add a title to your watchlist.">
+            <input class="grey darken-2" type="text" id="item-input" placeholder="Add a title to your watchlist.">
             
-        <button id="add-item" class="btn">Add</button></div>
+        <button id="add-item" class="btn black">Add</button></div>
         <div class="collection-item"></div>
         
         
