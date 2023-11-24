@@ -7,27 +7,40 @@ nav{
 
 button{
   padding: 10px;
+  margin-top: 10px;
+ 
 }
 
+/* title of websise - Movie Track */
 h1{
   font-family: 'Alata', sans-serif;
   font-family: 'Tourney', sans-serif;
   font-size: 90px;
   text-align: center;
-  color: #d69003;
+  color: #e2510d;
 }
 
 body{
   min-height: 100vh;
 }
 
+img{
+ margin-top: -7px;
+}
 
+img:hover{
+  color: rgb(0, 140, 255);
+}
+
+/* text about website */
 .center-align{
   font-family: 'Georama', sans-serif;
-  font-size: 25px;
+  font-size: 23px;
   color: whitesmoke;
 }
 
+
+/* container for both Movie & Soundtrack */
 .parent-container{
   margin-left: 25%;
   margin-right: 25%;  /*i changed these (left & right) because my laptop monitor is small. Now they are side by side on my small monitor-HP*/
@@ -38,6 +51,7 @@ body{
   flex-direction: row;
 }
 
+/* container for Movie */
 .flex-container{
   justify-content: left; /* //justify-content needs to stay LEFT */
   display: flex;
@@ -47,17 +61,12 @@ body{
   font-family: 'Georama', sans-serif;
   font-weight: 550;
   color: whitesmoke;
-  /* box-shadow: 5px 5px 20px black; */
+  border-bottom: 5px, solid blue;
+  margin-top: 0px;
 }
 
-/* .flex-container::second-line{
-  font-weight: bold;
-} */
-/* .movieInfo::first-line{
-  font-weight: bold;
-} */
-
-.journal-text{
+/* text to tell user to save movie to watchlist */
+/* .journal-text{
   text-align: center;
   font-family: 'Georama', sans-serif;
   font-weight: 600;
@@ -66,38 +75,19 @@ body{
   margin-left: 25%;
   margin-right: 25%;
   margin-bottom: 0px;
-  background-color: rgb(41, 170, 80);
-}
+  background-color: #d69003;
+} */
 
 .flex-container2{
   display: flex;
   flex-direction: column; /*HP changed to column for text to be beneath soundtrack image*/
   justify-content: center;
   align-items: center;
-  /* max-width: 1500px; */
-  max-height: 310px;
+  /* max-height: 310px; */
   padding: 0px;
-  /* box-shadow: 5px 5px 15px black; */
-}
-
-
-.flex-container2:hover{
-    box-shadow: #109202;
-
-}
-
-.input-field{
-  margin: 10px;
-}
-
-.input-container{
-  margin-left: 25px;
-  margin-right: 25px;
+  /* border-bottom: 5px, solid blue; */
   margin-top: 0px;
-  margin-bottom: 5px;
-  background-color: rgb(72, 80, 96);
-  border: 2px solid rgb(74, 72, 72);
-  box-shadow: 3px outset gray;
+  margin-bottom: 0px;
 }
 
 .soundtrack-text{
@@ -108,83 +98,12 @@ body{
   color: whitesmoke;
 }
 
-.album{
-  text-align: left;
-  margin: 2%;
-  display: block;
-  width: 30px;
-  height:30px;
-}
-
-.cover{
-  margin-top: 5px;  /*HP added this so the image would align with movie poster*/
-  margin: 2%;
-  text-align: left;
-}
-
-/* .logo{
-  width: auto;
-  max-height: 200px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-} */
-
-.card{
-  width: 50%;
-  float: left;
-}
-
-/* star ratings */
-
-.rating{
-  position: relative;
-  width: 180px;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .3em;
-  padding: 5px;
-  overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 0 2px #b3acac;
-}
-
-.rating__result{
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(-10px) translateX(-5px);
-  z-index: -9;
-  font: 3em Arial, Helvetica, sans-serif;
-  color: #ebebeb8e;
-  pointer-events: none;
-}
-
-.rating__star{
-  font-size: 1.3em;
-  cursor: pointer;
-  color: #ffff8d;
-  transition: filter linear .3s;
-}
-
-.rating__star:hover{
-  filter: drop-shadow(1px 1px 4px #ffff00);
-}
-
-/* #btncolor{
-  background-color: black;
-} */
-
-/* id */
+/* id - movie info for movie list*/
 #list{
   list-style: none;
   width: 300px;
   height: 600px;
 }
-
-
 
 #results{
   display: flex;
@@ -193,11 +112,9 @@ body{
   max-width: 1000px;
   max-height:600px;
   margin: 2px;
+  margin-top: 7px;
 }
 
-#item-input.teal{
-  border: 3px solid rgba(82, 115, 116, 0.736);
-}
 
 /* Style for the error modal */
 #errorModal{
