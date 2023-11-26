@@ -8,7 +8,8 @@ nav{
 button{
   padding: 10px;
   margin-top: 10px;
- 
+  background-color: black;
+  color: white;
 }
 
 /* title of websise - Movie Track */
@@ -17,7 +18,7 @@ h1{
   font-family: 'Tourney', sans-serif;
   font-size: 90px;
   text-align: center;
-  color: #e2510d;
+  color: #f8621d;
 }
 
 body{
@@ -25,12 +26,12 @@ body{
 }
 
 img{
- margin-top: -7px;
+ margin-bottom: 0px;
 }
 
-img:hover{
+/* a:hover{
   color: rgb(0, 140, 255);
-}
+} */
 
 /* text about website */
 .center-align{
@@ -102,7 +103,7 @@ img:hover{
 #list{
   list-style: none;
   width: 300px;
-  height: 600px;
+  height: 700px;
 }
 
 #results{
@@ -112,9 +113,9 @@ img:hover{
   max-width: 1000px;
   max-height:600px;
   margin: 2px;
-  margin-top: 7px;
+  margin-top: -70px;
+  margin-bottom: 0px;
 }
-
 
 /* Style for the error modal */
 #errorModal{
@@ -160,14 +161,6 @@ img:hover{
 
 /* media queries */
 @media screen and (max-width:1339px) {
-  /* nav{
-    text-align: center;
-    margin: 0px;
-    max-width: 100%;
-  } */
-  /* main{
-    justify-content: center;
-  } */
   .parent-container{
     display: flex;
     justify-content: center;
@@ -200,16 +193,7 @@ img:hover{
     justify-content: center;
     margin-left: 5px;
   }
-  .journal-text{
-    text-align: center;
-    font-family:'Alegreya Sans', sans-serif;
-    font-size: 15px;
-    border: 2px solid gray;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 0px;
-    background-color: rgb(221, 244, 50);
-  };
+
 }
 
   /* hannah fixed cell phone format */
@@ -219,11 +203,11 @@ img:hover{
       font-family: 'Tourney', sans-serif;
       font-size: 60px;
       text-align: center;
-      color: #d69003;
+      color: #f8621d;
     }
 
     .center-align{
-      font-family: 'Alegreya Sans', sans-serif;
+      font-family: 'Georama', sans-serif;
       font-size: 20px;
       margin-left: 5%;
       margin-right: 5%;
@@ -254,16 +238,6 @@ img:hover{
 }
 
 @media screen and (max-width:500px){
-  .input-container{
-    /* margin-left: 5px;
-    margin-right: 5px; */
-    margin-top: 0px;
-    margin-bottom: 5px;
-    background-color: rgb(122, 179, 169);
-    border: 2px solid rgb(74, 72, 72);
-    box-shadow: 3px outset gray;
-    max-width: 90%;
-  }
- 
+  
 }
 

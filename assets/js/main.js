@@ -2,14 +2,17 @@ var searchButton = document.getElementById('searchButton');
 var input = document.getElementById('input');
 var movieInfo = document.getElementById('list');
 var moviePoster = document.querySelector('.moviePoster');
-// var title = document.querySelector(".title");
 var resultsList = document.getElementById("results");
 var clickMessage = document.querySelector(".soundtrack-text");
 const errorMessageElement = document.getElementById('errorMessage');
 const errorModal = document.querySelector('.modal');
+const watchlist = document.getElementById("watchlist");
 
 // Hides modal when site loads
 errorModal.style.display = 'none';
+
+const savedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+
 
 function omdbApi() {
   movieInfo.innerHTML = "";
@@ -48,12 +51,14 @@ function omdbApi() {
       var directorLi = document.createElement("li");
       var writerLi = document.createElement("li");
       var awardsLi = document.createElement("li");
+      var addButton = document.createElement("button");
       titleLi.textContent = title;
       yearLi.textContent = " - " + year;
       actorLi.textContent = "Actors: " + actors;
       directorLi.textContent = " Director: " + director;
       writerLi.textContent = " Writers: " + writer;
       awardsLi.textContent = " Awards: " + awards;
+      addButton.textContent = "Add to Watchlist";
       imgTaagg.setAttribute("src", poster);
       imgTaagg.setAttribute("class", "moviePoster");
       titleLi.setAttribute("class", "movieInfo");
@@ -69,6 +74,13 @@ function omdbApi() {
       movieInfo.appendChild(directorLi);
       movieInfo.appendChild(writerLi);
       movieInfo.appendChild(awardsLi);
+      
+      
+      addButton.addEventListener("click", function(){
+        addMovieToWatchlist(title);
+      });
+
+      movieInfo.appendChild(addButton);
     })
 
     .catch(function (error) {
@@ -84,16 +96,67 @@ function omdbApi() {
     errorModal.style.display = 'none';
     searchButton.style.display = 'block';
   });
-};
+
+  //* adding movie title to WATCHLIST *//
+    function addMovieToWatchlist(title){
+      const newItem = {name: title, };
+      savedWatchlist.push(newItem);
+      createWatchlistItem(newItem);
+      updateLocalStorage();
+    }
+
+    // Function to create a new watchlist item
+    function createWatchlistItem(item) {
+      const listItem = document.createElement("li");
+      listItem.classList.add("collection-item");
+      listItem.style.color = "#f8621d";
+      listItem.style.fontFamily = "'Georama', sans-serif";
+      listItem.style.fontSize = "23px";
+      listItem.textContent = item.name;
+
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove from Watchlist";
+      removeButton.addEventListener("click", function (){
+        removeFromWatchlist(item, listItem);
+      });
+      listItem.appendChild(removeButton);
+      watchlist.appendChild(listItem);
+      updateLocalStorage();
+    }
+
+    //*function to remove item from watchlist*//
+    function removeFromWatchlist(item, listItem){
+      watchlist.removeChild(listItem);
+    };
+
+    //* Save watch list to local storage*//
+    function updateLocalStorage(){
+      localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
+    }  
+
+      // Append the list item to the watchlist
+    // Function to add a new item to the watchlist
+      const watchlistContainer = document.createElement("div");
+      watchlistContainer.appendChild(watchlist);
+      document.body.appendChild(watchlistContainer);
+
+      //* Call creatWatchListItem for each item in the watchlist after the page loads*//
+      savedWatchlist.forEach(createWatchlistItem);
+      
+      document.addEventListener("DOMContentLoaded", function(){
+        omdbApi();
+      });
+      
+    };   
 
 
 searchButton.addEventListener("click", omdbApi);
-clickMessage.innerHTML = "";
+
+
+//* SPOTIFY API*//
 
 const userInput = document.querySelector('input');
 const btn = document.getElementById('searchButton');
-var album = document.querySelector(".album");
-var cover = document.querySelector(".cover");
 async function getMusic(soundtrack) {
   const url = `https://spotify23.p.rapidapi.com/search/?q=${soundtrack}+soundtrack&type=albums&offset=0&limit=2&numberOfTopResults=2`;
   const options = {
@@ -137,65 +200,4 @@ async function getMusic(soundtrack) {
 btn.addEventListener("click", function () {
   const music = input.value;
   getMusic(music);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const watchlist = document.getElementById("watchlist");
-  const itemInput = document.getElementById("item-input");
-  const addItemButton = document.getElementById("add-item");
-
-  // Retrieve watchlist from local storage
-  const savedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
-
-  // Load saved items
-  savedWatchlist.forEach((item) => {
-    createWatchlistItem(item);
-  });
-
-  // Function to create a new watchlist item
-  function createWatchlistItem(item) {
-    const listItem = document.createElement("li");
-    listItem.classList.add("collection-item");
-    listItem.style.backgroundColor = "#009688";
-
-
-    // Create item name from input
-    const itemName = document.createElement("span");
-    itemName.textContent = item.name;
-
-    // Create input field for comments
-    const commentsInput = document.createElement("input");
-    commentsInput.type = "text";
-    commentsInput.value = item.comments;
-    commentsInput.placeholder = "Add comments";
-    commentsInput.style.backgroundColor = "#009688";
-    commentsInput.addEventListener("input", function () {
-      item.comments = commentsInput.value;
-      updateLocalStorage();
-    });
-
-    // Append item name and comments input to the list item
-    listItem.appendChild(itemName);
-    listItem.appendChild(commentsInput);
-
-    // Append the list item to the watchlist
-    watchlist.appendChild(listItem);
-  }
-
-  // Function to add a new item to the watchlist
-  function addWatchlistItem() {
-    const newItem = { name: itemInput.value, comments: "" };
-    savedWatchlist.push(newItem);
-    createWatchlistItem(newItem);
-    updateLocalStorage();
-    itemInput.value = ""; // Clear the input field after adding the item
-  }
-
-  // Update local storage with the current watchlist
-  function updateLocalStorage() {
-    localStorage.setItem("watchlist", JSON.stringify(savedWatchlist));
-  }
-
-  // Add event listeners
-  addItemButton.addEventListener("click", addWatchlistItem);
 });
