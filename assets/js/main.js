@@ -136,7 +136,7 @@ function removeFromWatchlist(item, listItem){
 
 //* Save watch list to local storage*//
 function updateLocalStorage(){
-  localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
+   localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
 }  
 
   // Append the list item to the watchlist
@@ -148,8 +148,9 @@ const watchlistContainer = document.createElement("div");
   //* Call creatWatchListItem for each item in the watchlist after the page loads*//
 savedWatchlist.forEach(createWatchlistItem);
   
-document.addEventListener("DOMContentLoaded", function(){
-    updateLocalStorage();
+document.addEventListener("DOMContentLoaded", function(event){
+    // event.preventDefault();
+    updateLocalStorage(savedWatchlist);
 });
   
 //* SPOTIFY API*//
