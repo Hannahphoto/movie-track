@@ -96,63 +96,62 @@ function omdbApi() {
     errorModal.style.display = 'none';
     searchButton.style.display = 'block';
   });
-
-  //* adding movie title to WATCHLIST *//
-    function addMovieToWatchlist(title){
-      const newItem = {name: title, };
-      savedWatchlist.push(newItem);
-      createWatchlistItem(newItem);
-      updateLocalStorage();
-    }
-
-    // Function to create a new watchlist item
-    function createWatchlistItem(item) {
-      const listItem = document.createElement("li");
-      listItem.classList.add("collection-item");
-      listItem.style.color = "#f8621d";
-      listItem.style.fontFamily = "'Georama', sans-serif";
-      listItem.style.fontSize = "23px";
-      listItem.textContent = item.name;
-
-      const removeButton = document.createElement("button");
-      removeButton.textContent = "Remove from Watchlist";
-      removeButton.addEventListener("click", function (){
-        removeFromWatchlist(item, listItem);
-      });
-      listItem.appendChild(removeButton);
-      watchlist.appendChild(listItem);
-      updateLocalStorage();
-    }
-
-    //*function to remove item from watchlist*//
-    function removeFromWatchlist(item, listItem){
-      watchlist.removeChild(listItem);
-    };
-
-    //* Save watch list to local storage*//
-    function updateLocalStorage(){
-      localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
-    }  
-
-      // Append the list item to the watchlist
-    // Function to add a new item to the watchlist
-      const watchlistContainer = document.createElement("div");
-      watchlistContainer.appendChild(watchlist);
-      document.body.appendChild(watchlistContainer);
-
-      //* Call creatWatchListItem for each item in the watchlist after the page loads*//
-      savedWatchlist.forEach(createWatchlistItem);
-      
-      document.addEventListener("DOMContentLoaded", function(){
-        omdbApi();
-      });
-      
-    };   
-
+};   
 
 searchButton.addEventListener("click", omdbApi);
 
+//* adding movie title to WATCHLIST *//
+function addMovieToWatchlist(title){
+  const newItem = {name: title, };
+  savedWatchlist.push(newItem);
+  createWatchlistItem(newItem);
+}
 
+// Function to create a new watchlist item
+function createWatchlistItem(item) {
+  const listItem = document.createElement("li");
+  listItem.classList.add("collection-item");
+  listItem.style.color = "#f8621d";
+  listItem.style.fontFamily = "'Georama', sans-serif";
+  listItem.style.marginLeft = "20px";
+  listItem.style.fontSize = "23px";
+  listItem.textContent = item.name;
+
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "Remove from Watchlist";
+  removeButton.addEventListener("click", function (){
+    removeFromWatchlist(item, listItem);
+  });
+  listItem.appendChild(removeButton);
+  watchlist.appendChild(listItem);
+  updateLocalStorage();
+}
+
+//*function to remove item from watchlist*//
+function removeFromWatchlist(item, listItem){
+  watchlist.removeChild(listItem);
+  savedWatchlist.removeChild(listItem);
+  updateLocalStorage();
+};
+
+//* Save watch list to local storage*//
+function updateLocalStorage(){
+  localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
+}  
+
+  // Append the list item to the watchlist
+// Function to add a new item to the watchlist
+const watchlistContainer = document.createElement("div");
+  watchlistContainer.appendChild(watchlist);
+  document.body.appendChild(watchlistContainer);
+
+  //* Call creatWatchListItem for each item in the watchlist after the page loads*//
+savedWatchlist.forEach(createWatchlistItem);
+  
+document.addEventListener("DOMContentLoaded", function(){
+    updateLocalStorage();
+});
+  
 //* SPOTIFY API*//
 
 const userInput = document.querySelector('input');

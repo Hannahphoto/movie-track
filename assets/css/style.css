@@ -1,15 +1,21 @@
 /* Element */
 nav{
+  font-family: 'Georama', sans-serif;
   text-align: center;
   margin: 0px;
   max-width: 100%;
+  margin-top: 10px;
 }
 
 button{
-  padding: 10px;
-  margin-top: 10px;
+  padding: 7px;
+  margin-top: 7px;
+  margin-left: 70px;
+  margin-bottom: 7px;
   background-color: black;
   color: white;
+  font-family: 'Georama', sans-serif;
+  border-radius: 4px;
 }
 
 /* title of websise - Movie Track */
@@ -66,19 +72,6 @@ img{
   margin-top: 0px;
 }
 
-/* text to tell user to save movie to watchlist */
-/* .journal-text{
-  text-align: center;
-  font-family: 'Georama', sans-serif;
-  font-weight: 600;
-  font-size: 25px;
-  border: 2px solid gray;
-  margin-left: 25%;
-  margin-right: 25%;
-  margin-bottom: 0px;
-  background-color: #d69003;
-} */
-
 .flex-container2{
   display: flex;
   flex-direction: column; /*HP changed to column for text to be beneath soundtrack image*/
@@ -116,6 +109,7 @@ img{
   margin-top: -70px;
   margin-bottom: 0px;
 }
+
 
 /* Style for the error modal */
 #errorModal{
@@ -170,30 +164,40 @@ img{
   }
   .flex-container{
     margin:0px;
-    /* margin-right: 70px; */
     margin-right: 25%;
     margin-left: 25%;
     flex-wrap: wrap;
-    /* box-shadow: 5px 5px 20px black; */
+    
   }
   .flex-container2{
     display: flex;
     flex-direction: column; /*HP changed to column for text to be beneath soundtrack image*/
     justify-content: center;
     align-items: center;
-    /* max-width: 1500px; */
     max-height: 600px;
     padding: 0px;
-    /* box-shadow: 5px 5px 15px black; */
   }
   .cover{
     margin-top: 10px;  /*HP added this so the image would align with movie poster*/
-    /* margin: 2%; */
     text-align: center;
     justify-content: center;
     margin-left: 5px;
   }
-
+  #list{
+    list-style: none;
+    width: 300px;
+    height: 700px;
+  }
+  button{
+    padding: 7px;
+    margin-top: 7px;
+    margin-left: 70px;
+    margin-bottom: 7px;
+    background-color: black;
+    color: white;
+    font-family: 'Georama', sans-serif;
+    border-radius: 4px;
+  }
 }
 
   /* hannah fixed cell phone format */
@@ -235,9 +239,21 @@ img{
       max-height: 600px;
       padding: 0px;
     }
+    #list{
+      list-style: none;
+      width: 300px;
+      height: 700px;
+    }
+    button{
+      padding: 7px;
+      margin-top: 7px;
+      margin-left: 70px;
+      margin-bottom: 7px;
+      background-color: black;
+      color: white;
+      font-family: 'Georama', sans-serif;
+      border-radius: 4px;
+    }
 }
 
-@media screen and (max-width:500px){
-  
-}
 
