@@ -7,9 +7,7 @@ var clickMessage = document.querySelector(".soundtrack-text");
 const errorMessageElement = document.getElementById('errorMessage');
 const errorModal = document.querySelector('.modal');
 const watchlist = document.getElementById("watchlist");
-var addButton = document.createElement("button");
 
-const savedWatchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 // Hides modal when site loads
 errorModal.style.display = 'none';
@@ -53,7 +51,7 @@ function omdbApi() {
       var directorLi = document.createElement("li");
       var writerLi = document.createElement("li");
       var awardsLi = document.createElement("li");
-      
+      var addButton = document.createElement("button");
       titleLi.textContent = title;
       yearLi.textContent = " - " + year;
       actorLi.textContent = "Actors: " + actors;
@@ -76,11 +74,11 @@ function omdbApi() {
       movieInfo.appendChild(directorLi);
       movieInfo.appendChild(writerLi);
       movieInfo.appendChild(awardsLi);
-      
-      
-     
-
       movieInfo.appendChild(addButton);
+
+      addButton.addEventListener("click", function(){
+        addMovieToWatchlist(title);
+      });
     })
 
     .catch(function (error) {
@@ -96,11 +94,10 @@ function omdbApi() {
     errorModal.style.display = 'none';
     searchButton.style.display = 'block';
   });
+
 };   
 
-addButton.addEventListener("click", function(){
-  addMovieToWatchlist();
-});
+
 
 searchButton.addEventListener("click", omdbApi);
 
@@ -159,8 +156,7 @@ btn.addEventListener("click", function () {
 //* adding movie title to WATCHLIST *//
 
 
-
-
+const savedWatchlist = json.parse(localStorage.getItem("watchlist")) || [];
 
 function addMovieToWatchlist(title){
   const newItem = {name: title, };
@@ -195,6 +191,7 @@ function createWatchlistItem(item) {
 //*function to remove item from watchlist*//
 function removeFromWatchlist(item, listItem){
   watchlist.removeChild(listItem);
+  // savedWatchlist.removeChild(listItem);
   const index = savedWatchlist.indexOf(item);
   if(index !== -1){
     savedWatchlist.splice(index, 1);
