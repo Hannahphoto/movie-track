@@ -11,12 +11,18 @@ const watchlist = document.getElementById("watchlist");
 // Hides modal when site loads
 errorModal.style.display = 'none';
 
+let savedWatchlist = [];
 
-
-const savedWatchlist = []|| JSON.parse(localStorage.getItem("watchlist"));
-
-
-
+function init(){
+  var storageArray = JSON.parse(localStorage.getItem("watchlist"));
+  if(storageArray !== null ){
+    for( var i = 0; i < storageArray.length; i++){
+      console.log(searchButton[i]);
+    }
+  }
+  console.log("hello");
+}
+init();
 
 function omdbApi() {
   movieInfo.innerHTML = "";
@@ -108,7 +114,9 @@ searchButton.addEventListener("click", omdbApi);
 function addMovieToWatchlist(title){
   const newItem = {name: title, };
   savedWatchlist.push(newItem);
+  localStorage.setItem("watchlist", JSON.stringify(savedWatchlist));
   createWatchlistItem(newItem);
+  console.log("hey")
 }
 
 // Function to create a new watchlist item
@@ -125,12 +133,13 @@ function createWatchlistItem(item) {
   const removeButton = document.createElement("button");
   removeButton.textContent = "Remove from Watchlist";
   removeButton.style.fontSize = "14px";
-  removeButton.addEventListener("click", function (){
-    removeFromWatchlist(item, listItem);
-  });
+  removeButton.style.borderColor = "black";
+  // removeButton.addEventListener("click", function (){
+  //   removeFromWatchlist(item, listItem);
+  // });
   listItem.appendChild(removeButton);
   watchlist.appendChild(listItem);
-  updateLocalStorage();
+  // updateLocalStorage();
 }
 
 //*function to remove item from watchlist*//
@@ -151,6 +160,7 @@ const watchlistContainer = document.createElement("div");
   watchlistContainer.appendChild(watchlist);
   document.body.appendChild(watchlistContainer);
 
+savedWatchlist = localStorage.getItem("watchlist") ?JSON.parse(localStorage.getItem("watchlist")):[];
   //* Call creatWatchListItem for each item in the watchlist after the page loads*//
 savedWatchlist.forEach(createWatchlistItem);
   
