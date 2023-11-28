@@ -8,11 +8,15 @@ const errorMessageElement = document.getElementById('errorMessage');
 const errorModal = document.querySelector('.modal');
 const watchlist = document.getElementById("watchlist");
 
-
 // Hides modal when site loads
 errorModal.style.display = 'none';
 
-//Movie API///
+
+
+const savedWatchlist = []|| JSON.parse(localStorage.getItem("watchlist"));
+
+
+
 
 function omdbApi() {
   movieInfo.innerHTML = "";
@@ -74,11 +78,13 @@ function omdbApi() {
       movieInfo.appendChild(directorLi);
       movieInfo.appendChild(writerLi);
       movieInfo.appendChild(awardsLi);
-      movieInfo.appendChild(addButton);
-
+      
+      
       addButton.addEventListener("click", function(){
         addMovieToWatchlist(title);
       });
+
+      movieInfo.appendChild(addButton);
     })
 
     .catch(function (error) {
@@ -94,14 +100,64 @@ function omdbApi() {
     errorModal.style.display = 'none';
     searchButton.style.display = 'block';
   });
-
 };   
-
-
 
 searchButton.addEventListener("click", omdbApi);
 
+//* adding movie title to WATCHLIST *//
+function addMovieToWatchlist(title){
+  const newItem = {name: title, };
+  savedWatchlist.push(newItem);
+  createWatchlistItem(newItem);
+}
 
+// Function to create a new watchlist item
+function createWatchlistItem(item) {
+  const listItem = document.createElement("li");
+  listItem.classList.add("collection-item");
+  listItem.style.color = "#f8621d";
+  listItem.style.fontFamily = "'Georama', sans-serif";
+  listItem.style.marginLeft = "20px";
+  listItem.style.fontSize = "23px";
+  listItem.style.textAlign = "center";
+  listItem.textContent = item.name;
+
+  const removeButton = document.createElement("button");
+  removeButton.textContent = "Remove from Watchlist";
+  removeButton.style.fontSize = "14px";
+  removeButton.addEventListener("click", function (){
+    removeFromWatchlist(item, listItem);
+  });
+  listItem.appendChild(removeButton);
+  watchlist.appendChild(listItem);
+  updateLocalStorage();
+}
+
+//*function to remove item from watchlist*//
+function removeFromWatchlist(item, listItem){
+  watchlist.removeChild(listItem);
+  savedWatchlist.removeChild(listItem);
+  updateLocalStorage();
+};
+
+//* Save watch list to local storage*//
+function updateLocalStorage(){
+   localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
+}  
+
+  // Append the list item to the watchlist
+// Function to add a new item to the watchlist
+const watchlistContainer = document.createElement("div");
+  watchlistContainer.appendChild(watchlist);
+  document.body.appendChild(watchlistContainer);
+
+  //* Call creatWatchListItem for each item in the watchlist after the page loads*//
+savedWatchlist.forEach(createWatchlistItem);
+  
+document.addEventListener("DOMContentLoaded", function(event){
+    // event.preventDefault();
+    updateLocalStorage(savedWatchlist);
+});
   
 //* SPOTIFY API*//
 
@@ -150,70 +206,4 @@ async function getMusic(soundtrack) {
 btn.addEventListener("click", function () {
   const music = input.value;
   getMusic(music);
-});
-
-
-//* adding movie title to WATCHLIST *//
-
-
-const savedWatchlist = json.parse(localStorage.getItem("watchlist")) || [];
-
-function addMovieToWatchlist(title){
-  const newItem = {name: title, };
-  savedWatchlist.push(newItem);
-  createWatchlistItem(newItem);
-};
-
-
-
-// Function to create a new watchlist item
-function createWatchlistItem(item) {
-  const listItem = document.createElement("li");
-  listItem.classList.add("collection-item");
-  listItem.style.color = "#f8621d";
-  listItem.style.fontFamily = "'Georama', sans-serif";
-  listItem.style.marginLeft = "20px";
-  listItem.style.fontSize = "23px";
-  listItem.style.textAlign = "center";
-  listItem.textContent = item.name;
-
-  const removeButton = document.createElement("button");
-  removeButton.textContent = "Remove from Watchlist";
-  removeButton.style.fontSize = "14px";
-  removeButton.addEventListener("click", function (){
-    removeFromWatchlist(item, listItem);
-  });
-  listItem.appendChild(removeButton);
-  watchlist.appendChild(listItem);
-  updateLocalStorage();
-};
-
-//*function to remove item from watchlist*//
-function removeFromWatchlist(item, listItem){
-  watchlist.removeChild(listItem);
-  // savedWatchlist.removeChild(listItem);
-  const index = savedWatchlist.indexOf(item);
-  if(index !== -1){
-    savedWatchlist.splice(index, 1);
-  }
-  updateLocalStorage();
-};
-
-//* Save watch list to local storage*//
-function updateLocalStorage(){
-   localStorage.setItem("watchlist", savedWatchlist);
-};
-
-  // Append the list item to the watchlist
-// Function to add a new item to the watchlist
-const watchlistContainer = document.createElement("div");
-  watchlistContainer.appendChild(watchlist);
-  document.body.appendChild(watchlistContainer);
-
-  //* Call creatWatchListItem for each item in the watchlist after the page loads*//
-savedWatchlist.forEach(createWatchlistItem);
-  
-document.addEventListener("DOMContentLoaded", function(event){
-    // event.preventDefault();
-    updateLocalStorage(savedWatchlist);
 });
