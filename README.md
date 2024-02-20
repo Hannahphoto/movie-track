@@ -1,6 +1,6 @@
 # Movie Track
 
-**FiveStar**  
+**Movie Track**  
 
 # User Story
 As a user I want a website where I can search for movies and their soundtracks, add those movies to a watchlist. Using the OMDB and Spotify APIs, there will be the option to search for the movies along with their soundtrack linking to the Spotify App.
@@ -23,11 +23,13 @@ Seem to be on track with in class work and project meeting presentations on Thur
 Materialize 
 
 # Links #
-https://github.com/McKee-T/media-review
+Git Hub - https://github.com/Hannahphoto/movie-track
+
+Deployed - https://hannahphoto.github.io/movie-track/
 
 https://mckee-t.github.io/media-review/
 
 # Screenshot
 <div align="center">
-    <img src="./assets/image/Screenshot 2023-11-09 151730.png" href = "screenshot Five Star Website." />
+    <img src="./assets/image/screenshot.png" href = "screenshot Movie Track Website." />
     </div>
