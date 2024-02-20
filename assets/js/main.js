@@ -8,8 +8,8 @@ const errorMessageElement = document.getElementById('errorMessage');
 const errorModal = document.querySelector('.modal');
 const watchlist = document.getElementById("watchlist");
 
+//Button to add movie to a watchlist. hidden, will be revealed.
 var btn2 = document.getElementById("btn2");
-
 
 // Hides modal when site loads
 errorModal.style.display = 'none';
@@ -64,14 +64,12 @@ function omdbApi() {
       var directorLi = document.createElement("li");
       var writerLi = document.createElement("li");
       var awardsLi = document.createElement("li");
-      // var btn2 = document.getElementById("btn2");
       titleLi.textContent = title;
       yearLi.textContent = " - " + year;
       actorLi.textContent = "Actors: " + actors;
       directorLi.textContent = " Director: " + director;
       writerLi.textContent = " Writers: " + writer;
       awardsLi.textContent = " Awards: " + awards;
-      // btn2.textContent = "Add to Watchlist";
       imgTaagg.setAttribute("src", poster);
       imgTaagg.setAttribute("class", "moviePoster");
       titleLi.setAttribute("class", "movieInfo");
@@ -95,12 +93,6 @@ function omdbApi() {
 
       movieInfo.appendChild(btn2);
     })
-    //show btn2
-    // $(document).ready(function(){
-    //   $("#searchButton").click(function(){
-    //     $("#addToWatchlistBtn").show();
-    //   })
-    // })
 
     .catch(function (error) {
       // Display error message in the error modal
@@ -137,14 +129,13 @@ function createWatchlistItem(item) {
   listItem.classList.add("collection-item");
   listItem.style.color = "#f8621d";
   listItem.style.fontFamily = "'Georama', sans-serif";
-  // listItem.style.marginLeft = "20px";
   listItem.style.fontSize = "23px";
   listItem.style.textAlign = "center";
   listItem.textContent = item.name;
 
   const rmvBtn = document.getElementById("rmvBtn").cloneNode(true);
   rmvBtn.style.display = "block";
-  rmvBtn.style.width = "100px";
+  rmvBtn.style.width = "90px";
   rmvBtn.style.margin = "0 auto";
   rmvBtn.style.padding = "7px";
   rmvBtn.style.marginBottom = "25px";
@@ -162,8 +153,6 @@ function removeFromWatchlist(deletedItem, listItem){
  
   watchlist.removeChild(listItem);
   console.log("heyo")
-  // savedWatchlist.removeChild(listItem);
-  // savedWatchlist.splice(localStorage, 1);
   updateLocalStorage();
 };
 
@@ -188,49 +177,49 @@ document.addEventListener("DOMContentLoaded", function(){
   
 //* SPOTIFY API*//
 
-// const userInput = document.querySelector('input');
-// const btn = document.getElementById('searchButton');
-// async function getMusic(soundtrack) {
-//   const url = `https://spotify23.p.rapidapi.com/search/?q=${soundtrack}+soundtrack&type=albums&offset=0&limit=2&numberOfTopResults=2`;
-//   const options = {
-//     method: 'GET',
-//     headers: {
-//       'X-RapidAPI-Key': '2f1a3d9f52mshb5bfe6b7565c7c1p1eae55jsn8b0637a741a0',
-//       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-//     }
-//   };
+const userInput = document.querySelector('input');
+const btn = document.getElementById('searchButton');
+async function getMusic(soundtrack) {
+  const url = `https://spotify23.p.rapidapi.com/search/?q=${soundtrack}+soundtrack&type=albums&offset=0&limit=2&numberOfTopResults=2`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '2f1a3d9f52mshb5bfe6b7565c7c1p1eae55jsn8b0637a741a0',
+      'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+    }
+  };
 
-//   try {
-//     resultsList.innerHTML = "";
-//     clickMessage.innerHTML = "Click the soundtrack to listen on Spotify!";
-//     const response = await fetch(url, options);
-//     const result = await response.json();
-//     console.log((result));
-//     var albumItems = result.albums.items;
-//     for (var i = 0; i < albumItems.length; i++) {
-//       var anchorTag = document.createElement("a");
-//       var imageTag = document.createElement("img");
-//       var image = albumItems[i].data.coverArt.sources[0].url;
-//       var albumUri = albumItems[i].data.uri;
-//       var textLi = document.createElement("li");
-//       anchorTag.setAttribute("href", albumUri);
-//       anchorTag.setAttribute("title", "album link");
-//       imageTag.setAttribute("src", image);
-//       textLi.textContent = "Click the soundtrack to listen on Spotify!";
-//       textLi.setAttribute("class","soundTrack-text");
-//       anchorTag.appendChild(imageTag);
-//       resultsList.appendChild(anchorTag);
-//       flex-container2.appendChild(textLi);
+  try {
+    resultsList.innerHTML = "";
+    clickMessage.innerHTML = "Click the soundtrack to listen on Spotify!";
+    const response = await fetch(url, options);
+    const result = await response.json();
+    console.log((result));
+    var albumItems = result.albums.items;
+    for (var i = 0; i < albumItems.length; i++) {
+      var anchorTag = document.createElement("a");
+      var imageTag = document.createElement("img");
+      var image = albumItems[i].data.coverArt.sources[0].url;
+      var albumUri = albumItems[i].data.uri;
+      var textLi = document.createElement("li");
+      anchorTag.setAttribute("href", albumUri);
+      anchorTag.setAttribute("title", "album link");
+      imageTag.setAttribute("src", image);
+      textLi.textContent = "Click the soundtrack to listen on Spotify!";
+      textLi.setAttribute("class","soundTrack-text");
+      anchorTag.appendChild(imageTag);
+      resultsList.appendChild(anchorTag);
+      flex-container2.appendChild(textLi);
       
-//     }
-//     console.log(album.textContext);
-//     console.log(cover.src);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
+    }
+    console.log(album.textContext);
+    console.log(cover.src);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-// btn.addEventListener("click", function () {
-//   const music = input.value;
-//   getMusic(music);
-// });
+btn.addEventListener("click", function () {
+  const music = input.value;
+  getMusic(music);
+});
