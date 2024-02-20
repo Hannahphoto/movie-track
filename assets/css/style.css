@@ -99,6 +99,11 @@ img{
   height: 700px;
 }
 
+/* hide add to watchlist button */
+#btn2{   
+  display: none;
+}
+
 #results{
   display: flex;
   padding: 0px;

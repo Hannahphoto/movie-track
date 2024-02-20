@@ -8,6 +8,8 @@ const errorMessageElement = document.getElementById('errorMessage');
 const errorModal = document.querySelector('.modal');
 const watchlist = document.getElementById("watchlist");
 
+var btn2 = document.getElementById("btn2");
+
 // Hides modal when site loads
 errorModal.style.display = 'none';
 
@@ -61,14 +63,14 @@ function omdbApi() {
       var directorLi = document.createElement("li");
       var writerLi = document.createElement("li");
       var awardsLi = document.createElement("li");
-      var addButton = document.createElement("button");
+      // var btn2 = document.getElementById("btn2");
       titleLi.textContent = title;
       yearLi.textContent = " - " + year;
       actorLi.textContent = "Actors: " + actors;
       directorLi.textContent = " Director: " + director;
       writerLi.textContent = " Writers: " + writer;
       awardsLi.textContent = " Awards: " + awards;
-      addButton.textContent = "Add to Watchlist";
+      // btn2.textContent = "Add to Watchlist";
       imgTaagg.setAttribute("src", poster);
       imgTaagg.setAttribute("class", "moviePoster");
       titleLi.setAttribute("class", "movieInfo");
@@ -86,12 +88,18 @@ function omdbApi() {
       movieInfo.appendChild(awardsLi);
       
       
-      addButton.addEventListener("click", function(){
+      btn2.addEventListener("click", function(){
         addMovieToWatchlist(title);
       });
 
-      movieInfo.appendChild(addButton);
+      movieInfo.appendChild(btn2);
     })
+    //show btn2
+    // $(document).ready(function(){
+    //   $("#searchButton").click(function(){
+    //     $("#addToWatchlistBtn").show();
+    //   })
+    // })
 
     .catch(function (error) {
       // Display error message in the error modal
@@ -108,7 +116,10 @@ function omdbApi() {
   });
 };   
 
-searchButton.addEventListener("click", omdbApi);
+searchButton.addEventListener("click", function(){
+  omdbApi();
+  btn2.style.display = "block";
+});
 
 //* adding movie title to WATCHLIST *//
 function addMovieToWatchlist(title){
@@ -116,8 +127,8 @@ function addMovieToWatchlist(title){
   savedWatchlist.push(newItem);
   localStorage.setItem("watchlist", JSON.stringify(savedWatchlist));
   createWatchlistItem(newItem);
-  console.log("hey")
-}
+  // console.log("hey")
+};
 
 // Function to create a new watchlist item
 function createWatchlistItem(item) {
@@ -125,34 +136,38 @@ function createWatchlistItem(item) {
   listItem.classList.add("collection-item");
   listItem.style.color = "#f8621d";
   listItem.style.fontFamily = "'Georama', sans-serif";
-  listItem.style.marginLeft = "20px";
+  // listItem.style.marginLeft = "20px";
   listItem.style.fontSize = "23px";
   listItem.style.textAlign = "center";
   listItem.textContent = item.name;
 
   const removeButton = document.createElement("button");
-  removeButton.textContent = "Remove from Watchlist";
+  removeButton.textContent = "Remove";
   removeButton.style.fontSize = "14px";
   removeButton.style.borderColor = "black";
-  // removeButton.addEventListener("click", function (){
-  //   removeFromWatchlist(item, listItem);
-  // });
+  removeButton.addEventListener("click", function (){
+    removeFromWatchlist(item, listItem);
+  });
   listItem.appendChild(removeButton);
   watchlist.appendChild(listItem);
   // updateLocalStorage();
-}
+};
 
 //*function to remove item from watchlist*//
-function removeFromWatchlist(item, listItem){
+function removeFromWatchlist(deletedItem, listItem){
+  savedWatchlist = savedWatchlist.filter(item => item.name !== deletedItem.name);
+ 
   watchlist.removeChild(listItem);
-  savedWatchlist.removeChild(listItem);
+  console.log("heyo")
+  // savedWatchlist.removeChild(listItem);
+  // savedWatchlist.splice(localStorage, 1);
   updateLocalStorage();
 };
 
 //* Save watch list to local storage*//
 function updateLocalStorage(){
    localStorage.setItem("watchlist", (JSON.stringify(savedWatchlist)));
-}  
+};  
 
   // Append the list item to the watchlist
 // Function to add a new item to the watchlist
@@ -164,56 +179,55 @@ savedWatchlist = localStorage.getItem("watchlist") ?JSON.parse(localStorage.getI
   //* Call creatWatchListItem for each item in the watchlist after the page loads*//
 savedWatchlist.forEach(createWatchlistItem);
   
-document.addEventListener("DOMContentLoaded", function(event){
-    // event.preventDefault();
+document.addEventListener("DOMContentLoaded", function(){
     updateLocalStorage(savedWatchlist);
 });
   
 //* SPOTIFY API*//
 
-const userInput = document.querySelector('input');
-const btn = document.getElementById('searchButton');
-async function getMusic(soundtrack) {
-  const url = `https://spotify23.p.rapidapi.com/search/?q=${soundtrack}+soundtrack&type=albums&offset=0&limit=2&numberOfTopResults=2`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': '2f1a3d9f52mshb5bfe6b7565c7c1p1eae55jsn8b0637a741a0',
-      'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-    }
-  };
+// const userInput = document.querySelector('input');
+// const btn = document.getElementById('searchButton');
+// async function getMusic(soundtrack) {
+//   const url = `https://spotify23.p.rapidapi.com/search/?q=${soundtrack}+soundtrack&type=albums&offset=0&limit=2&numberOfTopResults=2`;
+//   const options = {
+//     method: 'GET',
+//     headers: {
+//       'X-RapidAPI-Key': '2f1a3d9f52mshb5bfe6b7565c7c1p1eae55jsn8b0637a741a0',
+//       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
+//     }
+//   };
 
-  try {
-    resultsList.innerHTML = "";
-    clickMessage.innerHTML = "Click the soundtrack to listen on Spotify!";
-    const response = await fetch(url, options);
-    const result = await response.json();
-    console.log((result));
-    var albumItems = result.albums.items;
-    for (var i = 0; i < albumItems.length; i++) {
-      var anchorTag = document.createElement("a");
-      var imageTag = document.createElement("img");
-      var image = albumItems[i].data.coverArt.sources[0].url;
-      var albumUri = albumItems[i].data.uri;
-      var textLi = document.createElement("li");
-      anchorTag.setAttribute("href", albumUri);
-      anchorTag.setAttribute("title", "album link");
-      imageTag.setAttribute("src", image);
-      textLi.textContent = "Click the soundtrack to listen on Spotify!";
-      textLi.setAttribute("class","soundTrack-text");
-      anchorTag.appendChild(imageTag);
-      resultsList.appendChild(anchorTag);
-      flex-container2.appendChild(textLi);
+//   try {
+//     resultsList.innerHTML = "";
+//     clickMessage.innerHTML = "Click the soundtrack to listen on Spotify!";
+//     const response = await fetch(url, options);
+//     const result = await response.json();
+//     console.log((result));
+//     var albumItems = result.albums.items;
+//     for (var i = 0; i < albumItems.length; i++) {
+//       var anchorTag = document.createElement("a");
+//       var imageTag = document.createElement("img");
+//       var image = albumItems[i].data.coverArt.sources[0].url;
+//       var albumUri = albumItems[i].data.uri;
+//       var textLi = document.createElement("li");
+//       anchorTag.setAttribute("href", albumUri);
+//       anchorTag.setAttribute("title", "album link");
+//       imageTag.setAttribute("src", image);
+//       textLi.textContent = "Click the soundtrack to listen on Spotify!";
+//       textLi.setAttribute("class","soundTrack-text");
+//       anchorTag.appendChild(imageTag);
+//       resultsList.appendChild(anchorTag);
+//       flex-container2.appendChild(textLi);
       
-    }
-    console.log(album.textContext);
-    console.log(cover.src);
-  } catch (error) {
-    console.error(error);
-  }
-}
+//     }
+//     console.log(album.textContext);
+//     console.log(cover.src);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
-btn.addEventListener("click", function () {
-  const music = input.value;
-  getMusic(music);
-});
+// btn.addEventListener("click", function () {
+//   const music = input.value;
+//   getMusic(music);
+// });
