@@ -27,7 +27,6 @@ Git Hub - https://github.com/Hannahphoto/movie-track
 
 Deployed - https://hannahphoto.github.io/movie-track/
 
-https://mckee-t.github.io/media-review/
 
 # Screenshot
 <div align="center">
