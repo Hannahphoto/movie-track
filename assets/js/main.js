@@ -10,6 +10,7 @@ const watchlist = document.getElementById("watchlist");
 
 var btn2 = document.getElementById("btn2");
 
+
 // Hides modal when site loads
 errorModal.style.display = 'none';
 
@@ -141,14 +142,16 @@ function createWatchlistItem(item) {
   listItem.style.textAlign = "center";
   listItem.textContent = item.name;
 
-  const removeButton = document.createElement("button");
-  removeButton.textContent = "Remove";
-  removeButton.style.fontSize = "14px";
-  removeButton.style.borderColor = "black";
-  removeButton.addEventListener("click", function (){
+  const rmvBtn = document.getElementById("rmvBtn").cloneNode(true);
+  rmvBtn.style.display = "block";
+  rmvBtn.style.width = "100px";
+  rmvBtn.style.margin = "0 auto";
+  rmvBtn.style.padding = "7px";
+  rmvBtn.style.marginBottom = "25px";
+  rmvBtn.addEventListener("click", function (){
     removeFromWatchlist(item, listItem);
   });
-  listItem.appendChild(removeButton);
+  listItem.appendChild(rmvBtn);
   watchlist.appendChild(listItem);
   // updateLocalStorage();
 };

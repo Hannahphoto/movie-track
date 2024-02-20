@@ -104,6 +104,19 @@ img{
   display: none;
 }
 
+#rmvBtn{
+  display: none;
+  padding: 7px;
+  /* margin-top: 7px;
+  margin-left: 900px;
+  margin-right: 900px;
+  margin-bottom: 7px;
+  background-color: black;
+  color: white;
+  font-family: 'Georama', sans-serif;
+  border-radius: 4px; */
+}
+
 #results{
   display: flex;
   padding: 0px;
