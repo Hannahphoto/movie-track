@@ -35,6 +35,10 @@ img{
  margin-bottom: 0px;
 }
 
+form{
+  margin-left: 20px;
+}
+
 /* text about website */
 .center-align{
   font-family: 'Georama', sans-serif;

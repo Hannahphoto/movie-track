@@ -139,6 +139,7 @@ function createWatchlistItem(item) {
   rmvBtn.style.margin = "0 auto";
   rmvBtn.style.padding = "7px";
   rmvBtn.style.marginBottom = "25px";
+  rmvBtn.style.textAlign= "center";
   rmvBtn.addEventListener("click", function (){
     removeFromWatchlist(item, listItem);
   });
