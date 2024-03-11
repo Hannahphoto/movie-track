@@ -114,6 +114,13 @@ searchButton.addEventListener("click", function(){
   btn2.style.display = "block";
 });
 
+document.getElementById("any").addEventListener("submit", function(event){
+  event.preventDefault();
+  omdbApi();
+
+  btn2.style.display = "block";
+});
+
 //* adding movie title to WATCHLIST *//
 function addMovieToWatchlist(title){
   const newItem = {name: title, };
@@ -207,6 +214,7 @@ async function getMusic(soundtrack) {
       anchorTag.setAttribute("title", "album link");
       imageTag.setAttribute("src", image);
       textLi.textContent = "Click the soundtrack to listen on Spotify!";
+    //put a span tag for an error if they down have spotify..
       textLi.setAttribute("class","soundTrack-text");
       anchorTag.appendChild(imageTag);
       resultsList.appendChild(anchorTag);
